@@ -1,6 +1,8 @@
-export async function getCharacters() {
+export async function getCharacters(id) {
   try {
-    const response = await fetch("https://rickandmortyapi.com/api/character/");
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character/?page=${id}`
+    );
     const json = await response.json();
     const data = JSON.stringify(json);
     const formated = JSON.parse(data);
