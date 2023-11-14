@@ -1,0 +1,47 @@
+:root {
+    --primary-color: #fff; /* Color de texto predeterminado */
+    --default-character-bg: #eee; /* Fondo predeterminado de la ficha del
+   personaje */
+    --background-color: hsl(220, 20%, 20%); /* Color de fondo general del
+   body */
+    --card-border-radius: 5px; /* Radio de borde para las tarjetas */
+    /* Colores adicionales para personalización */
+    --color-info: #17a2b8; /* Información */
+    --color-success: #28a745; /* Éxito */
+    --color-warning: #ffc107; /* Advertencia */
+    --color-danger: #dc3545; /* Peligro */
+    --color-light: #f8f9fa; /* Claro */
+    --color-dark: #343a40; /* Oscuro */
+    /* Colores para las fichas de personajes */
+    --character-bg-1: #6c757d; /* Gris oscuro */
+    --character-bg-2: #007bff; /* Azul */
+    --character-bg-3: #28a745; /* Verde */
+    --character-bg-4: #dc3545; /* Rojo */
+    --character-bg-5: #ffc107; /* Amarillo */
+   }
+   body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--primary-color);
+    background-color: var(--background-color);
+   }
+   .character-card {
+    background-color: var(--default-character-bg);
+    border-radius: var(--card-border-radius);
+    padding: 1em;
+    margin: 1em;
+    transition: background-color 0.3s ease;
+   }
+   /* Clases dinámicas para cambiar el fondo según el color seleccionado */
+   .color-bg-1 { background-color: var(--character-bg-1); }
+   .color-bg-2 { background-color: var(--character-bg-2); }
+   .color-bg-3 { background-color: var(--character-bg-3); }
+   .color-bg-4 { background-color: var(--character-bg-4); }
+   .color-bg-5 { background-color: var(--character-bg-5); }
+   /* Media queries para diseño responsivo */
+   @media (max-width: 768px) {
+    /* Adaptamos los estilos para dispositivos móviles */
+    .character-card {
+    margin: 0.5em;
+    }
+}
