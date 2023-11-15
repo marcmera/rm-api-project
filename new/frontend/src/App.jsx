@@ -33,7 +33,7 @@ function App() {
     ));
   }
   return (
-    <main>
+    <main className="App">
       <h1 className="text-6xl text-center p-16">Characters</h1>
       <div className="card">
         {character.map((character) => (
