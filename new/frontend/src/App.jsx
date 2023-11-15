@@ -6,7 +6,6 @@ import { getColors } from "./api/jsonplaceholder.api";
 function App() {
   const [character, setCharacters] = useState([]);
   const [color, setColors] = useState([]);
-<<<<<<< HEAD
   const [page, setPage] = useState(1);
   useEffect(() => {
     window.addEventListener("load", () => {});
@@ -14,14 +13,6 @@ function App() {
       const res = await getCharacters(page);
       console.log(res);
       setCharacters(res);
-=======
-  useEffect(() => {
-    async function loadCharacters() {
-      const res = await getCharacters();
-      const name = res;
-      console.log(name);
-      // setCharacters(res);
->>>>>>> 29ea3dc466a8d95d7fa5722f719f0d42f5bdd6ec
     }
     async function loadColors() {
       const res = await getColors();
@@ -29,7 +20,6 @@ function App() {
     }
     loadCharacters();
     // loadColors();
-<<<<<<< HEAD
   }, [page]);
   // function characterList() {
   //   return
@@ -63,10 +53,6 @@ function App() {
       </div>
     </main>
   );
-=======
-  }, []);
-  return <div>hola</div>;
->>>>>>> 29ea3dc466a8d95d7fa5722f719f0d42f5bdd6ec
 }
 
 export default App;
