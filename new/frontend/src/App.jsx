@@ -8,29 +8,36 @@ function App() {
   const [color, setColors] = useState([]);
   const [page, setPage] = useState(1);
   useEffect(() => {
-    window.addEventListener("load", () => {});
     async function loadCharacters() {
-      const res = await getCharacters(page);
-      console.log(res);
-      setCharacters(res);
+      try {
+        const res = await getCharacters(page);
+        setCharacters(res);
+      } catch (error) {
+        console.error("Error fetching characters:", error);
+      }
     }
-    async function loadColors() {
-      const res = await getColors();
-      setColors(res);
-    }
+    // async function loadColors() {
+    //   try {
+    //     const res = await getColors();
+    //     setColors(res);
+    //   } catch (error) {
+    //     console.error("Error fetching colors:", error);
+    //   }
+    // }
     loadCharacters();
     // loadColors();
   }, [page]);
-  // function characterList() {
-  //   return
+
+  // function colorList() {
+  //   return color.map((color) => (
+  //     <div key={color.id}>
+  //       <h1>{color.title}</h1>
+  //     </div>
   //   ));
   // }
-  function colorList() {
-    return color.map((color) => (
-      <div key={color.id}>
-        <h1>{color.title}</h1>
-      </div>
-    ));
+  function speakText(text) {
+    const msg = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(msg);
   }
   return (
     <main className="App">
@@ -38,11 +45,14 @@ function App() {
       <div className="card">
         {character.map((character) => (
           <div key={character.id}>
-            <h1 className="text-2xl">{character.name}</h1>
+            <h1 id="text-to-speak" className="text-2xl">
+              {character.name}
+            </h1>
             <img src={character.image} alt={character.name} />
+            <button onClick={() => speakText(character.name)}>Leer</button>
           </div>
         ))}
-        <div className="w-screen br-red-500">
+        <div className="w-[1200px] flex justify-around ">
           <button className="btn" onClick={() => setPage(page - 1)}>
             Prev
           </button>
