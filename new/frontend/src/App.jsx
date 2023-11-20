@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <Navigation />
       <Routes>
-        <Route path="/Rick&Morty" element={<Home />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/characters" element={<CharacterPage />} />
       </Routes>
     </BrowserRouter>

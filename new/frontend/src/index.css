@@ -22,7 +22,7 @@ body {
     .App {
         @apply mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-7xl w-full text-center;
     }
-    .card {
+    .cards {
         @apply gap-5 grid md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1 mx-3;
     }
     .btn {

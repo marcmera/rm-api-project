@@ -1,49 +1,53 @@
 import { useEffect, useState } from "react";
 import { getCharacters } from "../api/rm.api";
 import { getColors } from "../api/jsonplaceholder.api";
+import { useContext } from "react";
+import { CharacterContext } from "../pages/CharacterPage";
 
 export function CharactersList() {
+
   const [character, setCharacters] = useState([]);
   const [color, setColors] = useState([]);
-  const [page, setPage] = useState(1);
+  const  [loading, setLoading] = useState(false); 
+  const { state } = useContext(CharacterContext);
+
   useEffect(() => {
     async function loadCharacters() {
       try {
-        const res = await getCharacters(page);
-        setCharacters(res);
+        setLoading(true); 
+
+        let first, second = false; 
+
+        await getCharacters(state.page).then((res) => setCharacters(res)).finally(() => first = true);
+        await getColors().then((res) => setColors(res)).finally(() => second = true);
+
+        if(first && second) {
+          setLoading(false); 
+        }
       } catch (error) {
         console.error("Error fetching characters:", error);
       }
     }
-    // async function loadColors() {
-    //   try {
-    //     const res = await getColors();
-    //     setColors(res);
-    //   } catch (error) {
-    //     console.error("Error fetching colors:", error);
-    //   }
-    // }
     loadCharacters();
-    // loadColors();
-  }, [page]);
 
-  // function colorList() {
-  //   return color.map((color) => (
-  //     <div key={color.id}>
-  //       <h1>{color.title}</h1>
-  //     </div>
-  //   ));
-  // }
+    window.scrollTo(0, 0);
+  }, [state.page]);
+
   function speakText(text) {
     const msg = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(msg);
   }
+
+  if(loading) return <div>
+    Cargando...
+  </div>
+
   return (
     <main className="App">
-      <div className="card">
+      <div className="cards">
         {character.map((character) => (
-          <div key={character.id} className="">
-            <h1 id="text-to-speak" className="text-2xl p-5">
+          <div key={character.id} className="card">
+            <h1 id="text-to-speak" className="text-2xl p-5 name text-ellipis truncate" title={ character.name }>
               {character.name}
             </h1>
             <img src={character.image} alt={character.name} />
