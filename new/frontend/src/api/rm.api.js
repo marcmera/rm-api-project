@@ -10,14 +10,3 @@ export async function getCharacters(page) {
     throw error;
   }
 }
-
-export async function getCharacterById(id) {
-  try {
-    const response = await fetch(`${BASE_URL}/character/${id}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(`Error fetching character Id ${id}:`, error);
-    throw error;
-  }
-}
