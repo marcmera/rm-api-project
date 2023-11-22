@@ -1,14 +1,23 @@
-export async function getCharacters(id) {
+const BASE_URL = "https://rickandmortyapi.com/api";
+
+export async function getCharacters(page) {
   try {
-    const response = await fetch(
-      `https://rickandmortyapi.com/api/character/?page=${id}`
-    );
-    const json = await response.json();
-    const data = JSON.stringify(json);
-    const formated = JSON.parse(data);
-    return formated.results;
-    // updateCharacterCardColors(data);
+    const response = await fetch(`${BASE_URL}/character/?page=${page}`);
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("Error fetching characters:", error);
+    throw error;
+  }
+}
+
+export async function getCharacterById(id) {
+  try {
+    const response = await fetch(`${BASE_URL}/character/${id}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error fetching character Id ${id}:`, error);
+    throw error;
   }
 }

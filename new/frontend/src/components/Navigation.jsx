@@ -5,6 +5,8 @@ export function Navigation() {
     <nav className="h-20 bg-gray-300 flex justify-evenly items-center text-3xl">
       <NavLink to="/Rick&Morty">Home</NavLink>
       <NavLink to="/characters">Characters</NavLink>
+      <NavLink to="/episodes">Episodes</NavLink>
+      <NavLink to="/location">Locations</NavLink>
     </nav>
   );
 }

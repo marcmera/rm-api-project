@@ -1,56 +1,47 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { getCharacters } from "../api/rm.api";
 import { getColors } from "../api/jsonplaceholder.api";
+import Pagination from "../components/Pagination";
+import CharacterCard from "../components/CharacterCard";
+
 
 export function CharactersList() {
-  const [character, setCharacters] = useState([]);
-  const [color, setColors] = useState([]);
-  const [page, setPage] = useState(1);
+  const { page } = useParams();
+  const [characters, setCharacters] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [maxPage, setMaxPage] = useState(0);
+
   useEffect(() => {
     async function loadCharacters() {
-      try {
-        const res = await getCharacters(page);
-        setCharacters(res);
-      } catch (error) {
-        console.error("Error fetching characters:", error);
-      }
+      const res = await getCharacters(page);
+      setCharacters(res.results);
+      setMaxPage(res.info.pages);
     }
-    // async function loadColors() {
-    //   try {
-    //     const res = await getColors();
-    //     setColors(res);
-    //   } catch (error) {
-    //     console.error("Error fetching colors:", error);
-    //   }
-    // }
     loadCharacters();
-    // loadColors();
+    async function loadColors() {
+      const res = await getColors();
+      setColors(res);
+    }
+    loadColors();
   }, [page]);
-
-  // function colorList() {
-  //   return color.map((color) => (
-  //     <div key={color.id}>
-  //       <h1>{color.title}</h1>
-  //     </div>
-  //   ));
-  // }
-  function speakText(text) {
-    const msg = new SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(msg);
-  }
   return (
-    <main className="App">
-      <div className="card">
-        {character.map((character) => (
-          <div key={character.id} className="">
-            <h1 id="text-to-speak" className="text-2xl p-5">
-              {character.name}
-            </h1>
-            <img src={character.image} alt={character.name} />
-            <button onClick={() => speakText(character.name)}>Leer</button>
-          </div>
+    <main>
+      <section className="grid md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1 gap-3 ">
+        {characters.map((character) => (
+          <CharacterCard
+            key={character.id}
+            character={character}
+            colors={colors}
+          />
         ))}
-      </div>
+      </section>
+      <section className="grid grid-cols-2 place-items-center">
+        <Pagination
+          page={parseInt(page, 10)}
+          maxPage={maxPage}
+        />
+      </section>
     </main>
   );
 }
