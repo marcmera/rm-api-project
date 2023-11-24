@@ -14,7 +14,6 @@ export function EpisodesList() {
       const res = await getEpisodes(page);
       setEpisodes(res.results);
       setMaxPage(res.info.pages);
-      console.log(res);
     }
     loadEpisodes();
   }, [page]);

@@ -1,4 +1,4 @@
-export default function EpisodeCard({ episode, colors }) {
+export default function EpisodeCard({ episode }) {
   
     return (
       <div className="bg-gray-200 m-5 p-5 hover:bg-gray-400 hover:cursor-pointer hover:scale-105 rounded-lg flex flex-col justify-between items-center">
