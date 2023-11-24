@@ -2,14 +2,14 @@ import { useNavigate } from "react-router-dom";
 import next from "../assets/arrow_forward.svg";
 import back from "../assets/arrow_back.svg";
 
-export default function Pagination({ page, maxPage }) {
+export default function Pagination({url, page, maxPage }) {
     const navigate = useNavigate();
     const handlePrev = () => {
-        navigate(`/characters/page/${page - 1}`);
+        navigate(`/${url}/page/${page - 1}`);
         window.scrollTo(0, 0);
     };
     const handleNext = () => {
-        navigate(`/characters/page/${page + 1}`);
+        navigate(`/${url}/page/${page + 1}`);
         window.scrollTo(0, 0);
     };
     return (

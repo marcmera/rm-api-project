@@ -38,6 +38,7 @@ export function CharactersList() {
       </section>
       <section className="grid grid-cols-2 place-items-center">
         <Pagination
+          url="characters"
           page={parseInt(page, 10)}
           maxPage={maxPage}
         />
