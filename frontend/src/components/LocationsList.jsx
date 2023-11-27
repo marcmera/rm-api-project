@@ -30,7 +30,7 @@ export function LocationsList() {
       <section className="grid grid-cols-2 place-items-center">
         <Pagination
           url="location"
-          page= {parseInt(page, 10)}
+          page={parseInt(page, 10)}
           maxPage={maxPage}
         />
       </section>
